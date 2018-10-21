@@ -1,0 +1,680 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     30320,        672]
+NotebookOptionsPosition[     29189,        650]
+NotebookOutlinePosition[     29530,        665]
+CellTagsIndexPosition[     29487,        662]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Function describing synaptic independent activity.", "Text",
+ CellChangeTimes->{{3.748960348606029*^9, 
+  3.748960394928933*^9}},ExpressionUUID->"41ee97ed-3b70-474d-a131-\
+11fb6087255e"],
+
+Cell[BoxData[{
+ StyleBox[
+  RowBox[{
+   RowBox[{"\[Gamma]", "=", "1"}], ";", " ", 
+   RowBox[{"wthre", "=", "0"}], ";", " ", 
+   RowBox[{"aplus", "=", "1"}], ";", " ", 
+   RowBox[{"aminus", "=", 
+    RowBox[{"-", "1"}]}], ";"}], "Code"], "\n", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"activind", "[", "w_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"-", "\[Gamma]"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"w", "+", "1"}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", "w"}], ")"}], 
+    RowBox[{"(", 
+     RowBox[{"wthre", "-", "w"}], ")"}], " ", 
+    RowBox[{"(*", 
+     RowBox[{"The", " ", "activity", " ", "inidependent", " ", "function"}], 
+     "*)"}]}]}], "Code"]}], "Code",
+ CellChangeTimes->{{3.7326292913760223`*^9, 3.732629293670992*^9}, {
+  3.7326293988716297`*^9, 3.732629407364832*^9}, {3.732629721919483*^9, 
+  3.732629731952929*^9}, {3.732632054698666*^9, 3.7326320651861677`*^9}, {
+  3.732878303866624*^9, 3.732878317827669*^9}, {3.7489595876439505`*^9, 
+  3.7489596280970373`*^9}},
+ CellLabel->
+  "In[124]:=",ExpressionUUID->"27de9e2c-7427-4ebd-9c31-b0f5952ec9d3"],
+
+Cell["Function describing First Hebb\[CloseCurlyQuote]s postulate", "Text",
+ CellChangeTimes->{{3.748960426172801*^9, 
+  3.7489604566214724`*^9}},ExpressionUUID->"b5434392-6662-47bc-8d76-\
+11174cd510e7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"first", " ", "hebb\.b4s", " ", "postulate"}], "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Hebbact1", "[", 
+     RowBox[{"w_", ",", "preST_", ",", "spiketimes_List"}], "]"}], ":=", "\n", 
+    RowBox[{
+     UnderoverscriptBox["\[Sum]", 
+      RowBox[{"i", "=", "1"}], 
+      RowBox[{"Length", "[", "spiketimes", "]"}]], 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "-", "w"}], ")"}], " ", "aplus", " ", 
+      RowBox[{"Exp", "[", 
+       RowBox[{"preST", "-", 
+        RowBox[{
+        "spiketimes", "\[LeftDoubleBracket]", "i", 
+         "\[RightDoubleBracket]"}]}], "]"}]}]}]}], "  ", "\n"}]}]], "Code",
+ CellChangeTimes->{{3.7326314687550917`*^9, 3.732631501762143*^9}, {
+   3.732631531879634*^9, 3.732631539832644*^9}, {3.732877628822014*^9, 
+   3.732877644030876*^9}, {3.732877682011771*^9, 3.732877686882804*^9}, {
+   3.7328778701265087`*^9, 3.732877872601103*^9}, {3.73287822876143*^9, 
+   3.732878234959529*^9}, {3.732878694383522*^9, 3.732878694471875*^9}, {
+   3.733249959511758*^9, 3.7332499928780575`*^9}, 3.733250194709957*^9, {
+   3.7332503462498436`*^9, 3.73325038790169*^9}, 3.7332504785896497`*^9, {
+   3.7332505099453807`*^9, 3.7332505105079308`*^9}, {3.733252623899003*^9, 
+   3.7332526404920254`*^9}, {3.7358497140290823`*^9, 3.7358497445144243`*^9}},
+ CellLabel->
+  "In[130]:=",ExpressionUUID->"f73e88d5-e111-4659-a98d-e31f0fe2bdf2"],
+
+Cell["Function describing second Hebb\[CloseCurlyQuote]s postulate", "Text",
+ CellChangeTimes->{{3.7489604439022384`*^9, 
+  3.7489604533232627`*^9}},ExpressionUUID->"caae4b9c-fa77-4063-8f47-\
+e8187d7122f1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"second", " ", "hebbs", " ", "postulate"}], "*)"}], "\n", 
+  RowBox[{
+   RowBox[{"Hebbact2", "[", 
+    RowBox[{"w_", ",", "postST_", ",", "spiketimes_List"}], "]"}], ":=", "\n", 
+   RowBox[{
+    UnderoverscriptBox["\[Sum]", 
+     RowBox[{"i", "=", "1"}], 
+     RowBox[{"Length", "[", "spiketimes", "]"}]], 
+    RowBox[{"w", " ", "aminus", " ", 
+     RowBox[{"Exp", "[", 
+      RowBox[{
+       RowBox[{
+       "spiketimes", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+       "-", "postST"}], "]"}]}]}]}]}]], "Code",
+ CellChangeTimes->{{3.732630162204918*^9, 3.732630164112624*^9}, {
+   3.732630196805497*^9, 3.732630212600677*^9}, {3.732630425644189*^9, 
+   3.732630427286848*^9}, {3.732630565044135*^9, 3.732630569162056*^9}, {
+   3.732630634434861*^9, 3.7326306609965878`*^9}, {3.7326308377695837`*^9, 
+   3.732630861158554*^9}, {3.732630949426806*^9, 3.7326311960968227`*^9}, {
+   3.73263141619475*^9, 3.732631416587439*^9}, {3.732877646866928*^9, 
+   3.732877677612829*^9}, {3.732877876673801*^9, 3.732877878304874*^9}, {
+   3.732877929561139*^9, 3.732877936389814*^9}, 3.732878691513826*^9, {
+   3.7332499742816296`*^9, 3.733249983971105*^9}, {3.7332504537874527`*^9, 
+   3.733250512879098*^9}, {3.7332526459264975`*^9, 3.733252657444302*^9}, {
+   3.7358497261811905`*^9, 3.735849750757591*^9}},
+ CellLabel->
+  "In[127]:=",ExpressionUUID->"5c783020-436b-4600-9b8a-f994d3c100a9"],
+
+Cell["Neural network with Hebbian learning", "Text",
+ CellChangeTimes->{{3.7489604591722775`*^9, 
+  3.7489604747325134`*^9}},ExpressionUUID->"75cc553c-da73-4d28-be7c-\
+b597ac57c479"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hebbNet", "[", 
+   RowBox[{
+   "G_", ",", " ", "treshold_", ",", "externalinput_List", ",", 
+    "\[CapitalDelta]w2_"}], "]"}], ":=", "\[IndentingNewLine]", "\t", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"sis", ",", " ", "sols", ",", " ", 
+      RowBox[{"newST", "=", "0"}], ",", " ", "ic", ",", " ", 
+      RowBox[{"\[CapitalDelta]t", "=", 
+       SuperscriptBox["10", 
+        RowBox[{"-", "5"}]]}], ",", " ", "U", ",", " ", "i0", ",", "\n", 
+      "\t\t\t", "TableInputs", ",", " ", "TableST", ",", " ", 
+      RowBox[{"TableVoltageFunctions", "=", 
+       RowBox[{"{", "}"}]}], ",", " ", "voltageFunctions", ",", " ", 
+      "newmatrix", ",", "\n", "\t\t\t", 
+      RowBox[{"listST", "=", 
+       RowBox[{"{", "1", "}"}]}], ",", " ", 
+      RowBox[{"orderedST", "=", 
+       RowBox[{"{", "}"}]}], ",", " ", 
+      RowBox[{"indexST", "=", 
+       RowBox[{"{", "}"}]}], ",", " ", "index", ",", "n", ",", 
+      RowBox[{"net", "=", "G"}], ",", "netmatrix", ",", "l", ",", "vectorIN", 
+      ",", "vectorOUT", ",", 
+      RowBox[{"\[CapitalDelta]w", "=", "0.1"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", "\t\t", 
+    RowBox[{
+     RowBox[{"n", "=", 
+      RowBox[{"VertexCount", "[", "net", "]"}]}], ";", "\n", "\t\t", 
+     RowBox[{"ic", "=", " ", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", "n"}], "]"}]}], ";", "\n", "\t\t", 
+     RowBox[{"TableST", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", "}"}], ",", "n"}], "]"}]}], ";", "\n", "\t\t", 
+     RowBox[{
+      RowBox[{"TableInputs", "[", "t_", "]"}], "=", "externalinput"}], ";", 
+     "\n", "\t\t", 
+     RowBox[{"netmatrix", "=", 
+      RowBox[{"Normal", "@", 
+       RowBox[{"WeightedAdjacencyMatrix", "[", "net", "]"}]}]}], ";", "\n", 
+     "\t\t", 
+     RowBox[{"l", "=", 
+      RowBox[{"{", "netmatrix", "}"}]}], ";", "\n", "\t\t", 
+     RowBox[{"netmatrix", "=", 
+      RowBox[{"netmatrix", "/.", 
+       RowBox[{
+        RowBox[{"x_", "/;", 
+         RowBox[{"x", "\[Equal]", "0"}]}], "\[Rule]", "Infinity"}]}]}], ";", 
+     "\n", "\t\t", "\n", "\t\t", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "Perturbing", " ", "the", " ", "weights", " ", "if", " ", 
+        "\[CapitalDelta]w"}], " ", "\[NotEqual]", " ", "0"}], "*)"}], "\n", 
+     "\t\t", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"\[CapitalDelta]w", "\[Equal]", "0"}], ",", " ", ",", 
+       RowBox[{"{", "\n", "\t\t", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+               RowBox[{"i", ",", "j"}], "\[RightDoubleBracket]"}], "\[Equal]",
+               "Infinity"}], ",", ",", 
+             RowBox[{
+              RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+               RowBox[{"i", ",", "j"}], "\[RightDoubleBracket]"}], "=", 
+              RowBox[{"Max", "[", 
+               RowBox[{
+                RowBox[{"Min", "[", 
+                 RowBox[{"1", ",", 
+                  RowBox[{
+                   RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                    RowBox[{"i", ",", "j"}], "\[RightDoubleBracket]"}], "+", 
+                   "\[CapitalDelta]w2"}]}], "]"}], ",", 
+                RowBox[{"-", "1"}]}], "]"}]}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}], ";"}], "\n", 
+        "\t\t", "}"}]}], "]"}], ";", "\n", "\t\t", "\n", "\t\t", 
+     RowBox[{"(*", 
+      RowBox[{
+      "Generating", " ", "new", " ", "network", " ", "with", " ", "weights", 
+       " ", "perturbed"}], "*)"}], "\n", "\t\t", 
+     RowBox[{"G", " ", "=", " ", 
+      RowBox[{"WeightedAdjacencyGraph", "[", "netmatrix", "]"}]}], ";", "\n", 
+     "\t\t", "\n", "\t\t", 
+     RowBox[{
+      RowBox[{"U", "[", "t_", "]"}], " ", "=", " ", 
+      RowBox[{"varsGen", "[", "n", "]"}]}], ";", "\n", "\t\t", 
+     RowBox[{"While", "[", " ", 
+      RowBox[{
+       RowBox[{"listST", " ", "\[NotEqual]", " ", 
+        RowBox[{"{", "}"}]}], ",", "\n", "\t\t\t\t", 
+       RowBox[{
+        RowBox[{"listST", " ", "=", " ", 
+         RowBox[{"{", "}"}]}], ";", "\n", "\t\t\t\t", 
+        RowBox[{"sis", " ", "=", " ", 
+         RowBox[{"sisGen", "[", " ", 
+          RowBox[{
+           RowBox[{"U", "[", "t", "]"}], ",", " ", 
+           RowBox[{"TableInputs", "[", "t", "]"}]}], " ", "]"}]}], ";", "\n", 
+        "\t\t\t\t", 
+        RowBox[{"sols", " ", "=", " ", 
+         RowBox[{"Flatten", "@", 
+          RowBox[{"Table", "[", " ", 
+           RowBox[{
+            RowBox[{"NDSolve", "[", 
+             RowBox[{
+              RowBox[{"Flatten", "@", 
+               RowBox[{"{", "\[IndentingNewLine]", "\t\t\t\t\t\t", 
+                RowBox[{
+                 RowBox[{
+                 "sis", "\[LeftDoubleBracket]", "i", 
+                  "\[RightDoubleBracket]"}], ",", " ", 
+                 RowBox[{
+                  RowBox[{"u", "[", " ", 
+                   RowBox[{"newST", "+", "\[CapitalDelta]t"}], " ", "]"}], 
+                  " ", "\[Equal]", " ", 
+                  RowBox[{
+                  "ic", "\[LeftDoubleBracket]", "i", 
+                   "\[RightDoubleBracket]"}]}], ",", "\[IndentingNewLine]", 
+                 "\t\t\t\t\t\t\t", 
+                 RowBox[{"WhenEvent", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"u", "[", "t", "]"}], "\[Equal]", "treshold"}], 
+                    "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"AppendTo", "[", 
+                    RowBox[{"listST", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "t"}], "}"}]}], "]"}], ",", 
+                    "\"\<StopIntegration\>\""}], "}"}]}], "]"}]}], "}"}]}], 
+              ",", "\n", "\t\t\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"U", "[", "t", "]"}], "\[LeftDoubleBracket]", " ", "i",
+                " ", "\[RightDoubleBracket]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"t", ",", 
+                RowBox[{"newST", "+", "\[CapitalDelta]t"}], ",", "100"}], 
+               "}"}]}], "]"}], ",", "\n", "\t\t\t\t\t\t", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "1", ",", 
+              RowBox[{"Length", "[", 
+               RowBox[{"U", "[", "t", "]"}], "]"}]}], "}"}]}], "\n", 
+           "\t\t\t\t\t\t", "]"}]}]}], ";", "\t", "\[IndentingNewLine]", 
+        "\t\t\t\t", 
+        RowBox[{"index", " ", "=", " ", 
+         RowBox[{"listST", "\[LeftDoubleBracket]", " ", 
+          RowBox[{
+           RowBox[{"Flatten", "[", " ", 
+            RowBox[{
+             RowBox[{"Position", "[", " ", 
+              RowBox[{
+               RowBox[{"listST", "\[LeftDoubleBracket]", 
+                RowBox[{";;", ",", "2"}], "\[RightDoubleBracket]"}], ",", " ", 
+               RowBox[{"Min", "[", 
+                RowBox[{"listST", "\[LeftDoubleBracket]", 
+                 RowBox[{";;", ",", "2"}], "\[RightDoubleBracket]"}], "]"}]}],
+               " ", "]"}], ",", "1"}], "]"}], ",", "1"}], " ", 
+          "\[RightDoubleBracket]"}]}], ";", "\n", "\t\t\t\t", 
+        RowBox[{"newST", " ", "=", " ", 
+         RowBox[{"Min", "[", 
+          RowBox[{"listST", "\[LeftDoubleBracket]", 
+           RowBox[{";;", ",", "2"}], "\[RightDoubleBracket]"}], "]"}]}], ";", 
+        "\n", "\t\t\t\t", 
+        RowBox[{
+         RowBox[{"TableInputs", "[", "t_", "]"}], " ", "=", " ", 
+         RowBox[{"inGen", "[", 
+          RowBox[{"net", ",", "index", ",", "newST", ",", 
+           RowBox[{"TableInputs", "[", "t", "]"}]}], "]"}]}], ";", "\n", 
+        "\t\t\t\t", 
+        RowBox[{"ic", " ", "=", " ", 
+         RowBox[{"ciGen", "[", 
+          RowBox[{"index", ",", "sols", ",", "newST", ",", "ic", ",", "n"}], 
+          "]"}]}], ";", "\n", "\t\t\t\t", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"indexST", ",", "index"}], "]"}], ";", "\[IndentingNewLine]",
+         "\t\t\t\t", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"orderedST", ",", "newST"}], "]"}], ";", "\n", "\t\t\t\t", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"TableVoltageFunctions", ",", "sols"}], "]"}], ";", "\n", 
+        "\t\t\t\t", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"MemberQ", "[", 
+             RowBox[{"index", ",", "i"}], "]"}], ",", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{
+              RowBox[{
+              "TableST", "\[LeftDoubleBracket]", "i", 
+               "\[RightDoubleBracket]"}], ",", "newST"}], "]"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", "\n", 
+        "\t\t\t\t", "\n", "\t\t\t\t", 
+        RowBox[{"For", "[", 
+         RowBox[{
+          RowBox[{"i", "=", "1"}], ",", 
+          RowBox[{"i", "\[LessEqual]", 
+           RowBox[{"Length", "[", "index", "]"}]}], ",", 
+          RowBox[{"i", "++"}], ",", 
+          RowBox[{"{", "\n", "\t\t\t\t", 
+           RowBox[{
+            RowBox[{"vectorOUT", "=", 
+             RowBox[{"VertexOutComponent", "[", 
+              RowBox[{"G", ",", 
+               RowBox[{
+               "index", "\[LeftDoubleBracket]", "i", 
+                "\[RightDoubleBracket]"}], ",", "1"}], "]"}]}], ";", "\n", 
+            "\t\t\t\t", 
+            RowBox[{"vectorIN", "=", 
+             RowBox[{"VertexInComponent", "[", 
+              RowBox[{"G", ",", 
+               RowBox[{
+               "index", "\[LeftDoubleBracket]", "i", 
+                "\[RightDoubleBracket]"}], ",", "1"}], "]"}]}], ";", "\n", 
+            "\t\t\t\t\t", "\[IndentingNewLine]", "\t\t\t\t", 
+            RowBox[{"For", "[", 
+             RowBox[{
+              RowBox[{"j", "=", "2"}], ",", 
+              RowBox[{"j", "\[LessEqual]", 
+               RowBox[{"Length", "[", "vectorOUT", "]"}]}], ",", 
+              RowBox[{"j", "++"}], ",", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                   RowBox[{
+                    RowBox[{
+                    "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "vectorOUT", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], 
+                  "\[Equal]", "Infinity"}], "||", 
+                 RowBox[{
+                  RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                   RowBox[{
+                    RowBox[{
+                    "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "vectorOUT", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], 
+                  "\[Equal]", 
+                  RowBox[{"-", "Infinity"}]}]}], ",", ",", "\n", 
+                "\t\t\t\t\t\t", 
+                RowBox[{
+                 RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                  RowBox[{
+                   RowBox[{
+                   "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                   RowBox[{
+                   "vectorOUT", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "+=", 
+                 RowBox[{"\[CapitalDelta]w", 
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"activind", "[", 
+                    RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{
+                    "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "vectorOUT", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], 
+                    "]"}], "+", 
+                    RowBox[{"Hebbact2", "[", 
+                    RowBox[{
+                    RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{
+                    "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "vectorOUT", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], 
+                    ",", "newST", ",", 
+                    RowBox[{
+                    "TableST", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "]"}]}], ")"}]}]}]}], 
+               "]"}]}], "\n", "\t\t\t\t\t", "]"}], ";", "\n", "\t\t\t\t\t", 
+            RowBox[{"For", "[", 
+             RowBox[{
+              RowBox[{"j", "=", "2"}], ",", 
+              RowBox[{"j", "\[LessEqual]", " ", 
+               RowBox[{"Length", "[", "vectorIN", "]"}]}], ",", 
+              RowBox[{"j", "++"}], ",", 
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                   RowBox[{
+                    RowBox[{
+                    "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "vectorIN", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], 
+                  "\[Equal]", "Infinity"}], "||", 
+                 RowBox[{
+                  RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                   RowBox[{
+                    RowBox[{
+                    "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "vectorIN", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], 
+                  "\[Equal]", 
+                  RowBox[{"-", "Infinity"}]}]}], ",", ",", "\n", 
+                "\t\t\t\t\t\t", 
+                RowBox[{
+                 RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                  RowBox[{
+                   RowBox[{
+                   "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                   RowBox[{
+                   "vectorIN", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], "+=", 
+                 RowBox[{"\[CapitalDelta]w", 
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"activind", "[", 
+                    RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{
+                    "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "vectorIN", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], 
+                    "]"}], "+", 
+                    RowBox[{"Hebbact1", "[", 
+                    RowBox[{
+                    RowBox[{"netmatrix", "\[LeftDoubleBracket]", 
+                    RowBox[{
+                    RowBox[{
+                    "index", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "vectorIN", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "\[RightDoubleBracket]"}], 
+                    ",", "newST", ",", 
+                    RowBox[{
+                    "TableST", "\[LeftDoubleBracket]", "j", 
+                    "\[RightDoubleBracket]"}]}], "]"}]}], ")"}]}]}]}], 
+               "]"}]}], "\n", "\t\t\t\t\t", "]"}], ";", "\n", "\t\t\t\t", 
+            RowBox[{"newmatrix", "=", 
+             RowBox[{"netmatrix", "/.", 
+              RowBox[{
+               RowBox[{"x_", "/;", 
+                RowBox[{"x", "\[Equal]", "0"}]}], "\[Rule]", "Infinity"}]}]}],
+             ";", "\[IndentingNewLine]", "\t\t\t\t", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"l", ",", 
+              RowBox[{"netmatrix", "/.", 
+               RowBox[{
+                RowBox[{"x_", "/;", 
+                 RowBox[{"x", "\[Equal]", "Infinity"}]}], "\[Rule]", 
+                "0"}]}]}], "]"}], ";", "\[IndentingNewLine]", "\t\t\t\t", 
+            RowBox[{"net", "=", 
+             RowBox[{"WeightedAdjacencyGraph", "[", 
+              RowBox[{"newmatrix", ",", 
+               RowBox[{"DirectedEdges", "\[Rule]", "True"}], ",", 
+               RowBox[{"VertexLabels", "\[Rule]", "\"\<Name\>\""}]}], "]"}]}],
+             ";"}], "}"}]}], "]"}]}]}], "\t", "\n", "\t\t", "]"}], ";", "\n", 
+     "\t\t", 
+     RowBox[{"voltageFunctions", " ", "=", " ", 
+      RowBox[{"Table", "[", "\n", "\t\t\t\t", 
+       RowBox[{
+        RowBox[{"Piecewise", "[", 
+         RowBox[{"Table", "[", "\n", "\t\t\t\t\t\t", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"TableVoltageFunctions", "\[LeftDoubleBracket]", 
+              RowBox[{"j", ",", "i"}], "\[RightDoubleBracket]"}], ",", " ", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"j", "==", "1"}], ",", 
+               RowBox[{"0", "<", "t", "\[LessEqual]", 
+                RowBox[{
+                "orderedST", "\[LeftDoubleBracket]", "j", 
+                 "\[RightDoubleBracket]"}]}], ",", 
+               RowBox[{
+                RowBox[{"orderedST", "\[LeftDoubleBracket]", 
+                 RowBox[{"j", "-", "1"}], "\[RightDoubleBracket]"}], " ", "<",
+                 " ", "t", " ", "\[LessEqual]", " ", 
+                RowBox[{
+                "orderedST", "\[LeftDoubleBracket]", "j", 
+                 "\[RightDoubleBracket]"}]}]}], "]"}]}], "}"}], ",", "\n", 
+           "\t\t\t\t\t", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", "1", ",", 
+             RowBox[{"Length", "[", "orderedST", "]"}]}], "}"}]}], "]"}], 
+         "]"}], ",", "\n", "\t\t\t\t", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"Length", "[", 
+           RowBox[{"TableVoltageFunctions", "\[LeftDoubleBracket]", 
+            RowBox[{"1", ",", ";;"}], "\[RightDoubleBracket]"}], "]"}]}], 
+         "}"}]}], "\n", "\t\t", "]"}]}], ";", "\n", "\t", 
+     RowBox[{"Return", "[", 
+      RowBox[{"{", 
+       RowBox[{
+       "net", ",", " ", "indexST", ",", " ", "voltageFunctions", ",", " ", 
+        "TableST", ",", "l"}], "}"}], "]"}]}]}], "\n", "\t", "]"}]}]], "Code",
+ CellChangeTimes->{{3.7326419920156612`*^9, 3.732641992925694*^9}, {
+   3.732642037025898*^9, 3.732642055433276*^9}, {3.732642099004982*^9, 
+   3.732642219806653*^9}, {3.732642383734144*^9, 3.732642389904398*^9}, {
+   3.7326424550148277`*^9, 3.732642503581111*^9}, {3.732642551202497*^9, 
+   3.732642602805191*^9}, {3.732645129910722*^9, 3.7326451660209093`*^9}, {
+   3.732645215285286*^9, 3.732645219030411*^9}, {3.7326452608021193`*^9, 
+   3.732645272288987*^9}, {3.7328741574887743`*^9, 3.732874206022032*^9}, {
+   3.7328743161095867`*^9, 3.732874320327017*^9}, {3.7328743600891933`*^9, 
+   3.732874362324378*^9}, {3.732879069848981*^9, 3.732879132995088*^9}, {
+   3.7328792521357107`*^9, 3.7328792728236647`*^9}, {3.7332506474505424`*^9, 
+   3.7332506498984737`*^9}, {3.7332513026589603`*^9, 
+   3.7332513227833433`*^9}, {3.733252837710565*^9, 3.733252897060734*^9}, {
+   3.7332531725031667`*^9, 3.7332531914842157`*^9}, {3.7334245352616453`*^9, 
+   3.7334245372396145`*^9}, {3.733430219144539*^9, 3.73343022277625*^9}, {
+   3.733430255215088*^9, 3.7334302789982424`*^9}, 3.7334303241090574`*^9, {
+   3.7334303816273994`*^9, 3.733430405618432*^9}, {3.7334304593116136`*^9, 
+   3.7334304696762247`*^9}, {3.7334305901969414`*^9, 
+   3.7334306214056187`*^9}, {3.733430854859065*^9, 3.7334308605134463`*^9}, {
+   3.7334308911806126`*^9, 3.733430998911463*^9}, {3.733431066165732*^9, 
+   3.73343107115592*^9}, {3.7334311504703646`*^9, 3.7334311633051977`*^9}, {
+   3.7358629493411674`*^9, 3.735862952699399*^9}, {3.7358629941640673`*^9, 
+   3.73586299481651*^9}, 3.736607155782628*^9, {3.748960502458181*^9, 
+   3.748960531699051*^9}, {3.748960934427315*^9, 3.74896093658352*^9}, {
+   3.7489610118414836`*^9, 3.7489610435583525`*^9}, {3.7489611998674936`*^9, 
+   3.7489612685608625`*^9}, {3.748961331145009*^9, 3.7489613646208787`*^9}},
+ CellLabel->
+  "In[128]:=",ExpressionUUID->"00d20933-ea8f-4c17-939c-398da64b8df8"],
+
+Cell["Erdos - Renyi neural network with Hebbian learning. ", "Text",
+ CellChangeTimes->{{3.7489610642472043`*^9, 
+  3.748961090366659*^9}},ExpressionUUID->"afe19b9b-7fd0-460d-9650-\
+3cdd0e6f2fd0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"hebbNet", "[", 
+   RowBox[{
+   "n_", ",", " ", "p_", ",", " ", "treshold_", ",", "externalinput_List", 
+    ",", "\[CapitalDelta]w_"}], "]"}], ":=", "\[IndentingNewLine]", "\t", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "net", ",", " ", "indexST", ",", " ", "voltageFunctions", ",", " ", 
+      "TableST", ",", " ", "l"}], "}"}], ",", "\[IndentingNewLine]", "\t\t", 
+    RowBox[{
+     RowBox[{"net", " ", "=", " ", 
+      RowBox[{"weightedNet", "[", 
+       RowBox[{"n", ",", "p"}], "]"}]}], ";", "\n", "\t\t", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "net", ",", "indexST", ",", " ", "voltageFunctions", ",", " ", 
+        "TableST", ",", "l"}], "}"}], "=", 
+      RowBox[{"hebbNet", "[", 
+       RowBox[{
+       "net", ",", "treshold", ",", "externalinput", ",", 
+        "\[CapitalDelta]w"}], "]"}]}], ";", "\n", "\t\t", 
+     RowBox[{"Return", "[", 
+      RowBox[{"{", 
+       RowBox[{
+       "net", ",", "indexST", ",", " ", "voltageFunctions", ",", " ", 
+        "TableST", ",", "l"}], "}"}], "]"}]}]}], "\n", "\t", "]"}]}], "\n", 
+ RowBox[{"\t"}]}], "Code",
+ CellChangeTimes->{{3.7326338487761297`*^9, 3.7326339798395777`*^9}, {
+   3.732636017186159*^9, 3.7326360420368147`*^9}, {3.732636109234775*^9, 
+   3.732636167295767*^9}, {3.732636582277384*^9, 3.732636986470749*^9}, {
+   3.7326370304151163`*^9, 3.732637064321759*^9}, {3.732637234019505*^9, 
+   3.732637262380251*^9}, {3.73263794617272*^9, 3.732637991792857*^9}, {
+   3.732638028523734*^9, 3.732638040145116*^9}, {3.732638077224917*^9, 
+   3.732638174357712*^9}, {3.732638207310074*^9, 3.732638251994644*^9}, {
+   3.732641888359586*^9, 3.732641889482418*^9}, {3.732642659891755*^9, 
+   3.732642693793766*^9}, {3.732645234297229*^9, 3.732645236075467*^9}, {
+   3.732645290133081*^9, 3.732645322159727*^9}, {3.7332495963981557`*^9, 
+   3.733249599617072*^9}, {3.733251166179371*^9, 3.7332512873820896`*^9}, {
+   3.7332531136391783`*^9, 3.7332531630798573`*^9}, {3.733424398857956*^9, 
+   3.733424419782395*^9}, {3.7334310965964613`*^9, 3.733431141493125*^9}, {
+   3.733431355960824*^9, 3.733431383401168*^9}, {3.7358629622567854`*^9, 
+   3.735862963269452*^9}, {3.7358630020523386`*^9, 3.735863002142391*^9}, 
+   3.736607148185556*^9, {3.7489575598959007`*^9, 3.7489575615495033`*^9}, {
+   3.7489577955811143`*^9, 3.7489577973127174`*^9}, {3.7489587781625633`*^9, 
+   3.748958790388191*^9}, 3.7489604956179633`*^9, {3.74896053562646*^9, 
+   3.748960570930339*^9}, {3.7489608731143837`*^9, 3.748960912264866*^9}, {
+   3.748960945460539*^9, 3.748960992053243*^9}, 3.7489610562419853`*^9, {
+   3.7489610978036737`*^9, 3.7489611021544824`*^9}, {3.7489663485923576`*^9, 
+   3.7489663757444057`*^9}},
+ CellLabel->
+  "In[132]:=",ExpressionUUID->"99031a96-e493-400e-85f1-e4502a6cb924"]
+},
+WindowSize->{859, 806},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 192, 3, 34, "Text",ExpressionUUID->"41ee97ed-3b70-474d-a131-11fb6087255e"],
+Cell[753, 25, 1079, 28, 69, "Code",ExpressionUUID->"27de9e2c-7427-4ebd-9c31-b0f5952ec9d3"],
+Cell[1835, 55, 203, 3, 34, "Text",ExpressionUUID->"b5434392-6662-47bc-8d76-11174cd510e7"],
+Cell[2041, 60, 1422, 30, 138, "Code",ExpressionUUID->"f73e88d5-e111-4659-a98d-e31f0fe2bdf2"],
+Cell[3466, 92, 206, 3, 34, "Text",ExpressionUUID->"caae4b9c-fa77-4063-8f47-e8187d7122f1"],
+Cell[3675, 97, 1447, 29, 117, "Code",ExpressionUUID->"5c783020-436b-4600-9b8a-f994d3c100a9"],
+Cell[5125, 128, 182, 3, 34, "Text",ExpressionUUID->"75cc553c-da73-4d28-be7c-b597ac57c479"],
+Cell[5310, 133, 20845, 454, 1138, "Code",ExpressionUUID->"00d20933-ea8f-4c17-939c-398da64b8df8"],
+Cell[26158, 589, 196, 3, 34, "Text",ExpressionUUID->"afe19b9b-7fd0-460d-9650-3cdd0e6f2fd0"],
+Cell[26357, 594, 2828, 54, 159, "Code",ExpressionUUID->"99031a96-e493-400e-85f1-e4502a6cb924"]
+}
+]
+*)
+
