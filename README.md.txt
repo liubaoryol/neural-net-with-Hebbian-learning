@@ -1,2 +1,2 @@
 # Neural net
-This is the code of my thesis
+This is the code of my thesis.
